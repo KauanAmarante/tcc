@@ -1,0 +1,437 @@
+% ------------------------------------------------------------------------
+% Modelo de Trabalho de Conclusão de Curso em conformidade com 
+% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
+% Apresentacao
+% ------------------------------------------------------------------------
+
+\documentclass[12pt, oneside, a4paper, brazil]{abntex2}
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{lmodern}			     % Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		   % Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		 % Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			     % Usado pela Ficha catalográfica
+\usepackage{indentfirst}		   % Indenta o primeiro parágrafo de cada seção.
+\usepackage{color,xcolor}			 % Controle das cores
+\usepackage{graphicx}			     % Inclusão de gráficos
+\usepackage{microtype} 			   % para melhorias de justificação
+\usepackage[alf]{abntex2cite}	 % Citações padrão ABNT
+\usepackage{lipsum}            % Pode ser removido no final
+\usepackage{listingsutf8}
+
+
+
+% Altera o nome padrão do rótulo usado no comando \autoref{}
+\renewcommand{\lstlistingname}{Código}
+% Altera o rótulo a ser usando no elemento pré-textual "Lista de código"
+\renewcommand{\lstlistlistingname}{Lista de códigos}
+
+% Configura a ``Lista de Códigos'' conforme as regras da ABNT (para abnTeX2)
+\begingroup\makeatletter
+\let\newcounter\@gobble\let\setcounter\@gobbletwo
+  \globaldefs\@ne \let\c@loldepth\@ne
+  \newlistof{listings}{lol}{\lstlistlistingname}
+  \newlistentry{lstlisting}{lol}{0}
+\endgroup
+
+\renewcommand{\cftlstlistingaftersnum}{\hfill--\hfill}
+
+\let\oldlstlistoflistings\lstlistoflistings
+\renewcommand{\lstlistoflistings}{%
+   \begingroup%
+   \let\oldnumberline\numberline%
+   \renewcommand{\numberline}{\lstlistingname\space\oldnumberline}%
+   \oldlstlistoflistings%
+   \endgroup}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{numb}{RGB}{106, 109, 32}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinestyle{estiloCodigos}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{escapechar=@,style=estiloCodigos}
+
+
+\include{definicoes}
+% Informações de dados para CAPA e FOLHA DE ROSTO
+\instituicao{%
+  Instituto Federal Catarinense -- IFC
+  \par
+  Campus Araquari
+  \par
+  Bacharelado em Sistemas de Informação}
+\tipotrabalho{Monografia (Graduação)}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Trabalho de conclusão de curso apresentado como requisito parcial para a obtenção do grau de bacharel em Sistemas de Informação do Instituto Federal Catarinense.}
+
+
+% Configurações de aparência do PDF final
+% informações do PDF
+\makeatletter
+\hypersetup{
+   	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+   	pdfsubject={\imprimirpreambulo},
+    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+   	linkcolor=blue,          	% color of internal links
+   	citecolor=blue,        		% color of links to bibliography
+   	filecolor=magenta,     		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+% Espaçamentos entre linhas e parágrafos 
+
+\setlength{\parindent}{1.3cm}			% O tamanho do parágrafo é dado por:
+\setlength{\parskip}{0.2cm}  			% Controle do espaçamento entre um parágrafo e outro:
+
+
+% Início do documento
+\begin{document}
+%\selectlanguage{english}
+\selectlanguage{brazil} 				% Seleciona o idioma do documento (conforme pacotes do babel)
+\frenchspacing 							    % Retira espaço extra obsoleto entre as frases.
+
+% ELEMENTOS PRÉ-TEXTUAIS
+\imprimircapa							% Capa
+\imprimirfolhaderosto*		% Folha de rosto
+								          % (o * indica que haverá a ficha bibliográfica)
+
+% Inserir a ficha bibliografica
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de 
+% catalogação-na-publicação''. Utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca fornecerá um PDF com a ficha catalográfica 
+% definitiva após a defesa do trabalho. Quando estiver com o documento, salve-o como PDF 
+% no diretório do seu projeto e substitua todo o conteúdo de implementação deste arquivo 
+% pelo comando abaixo:
+%
+% \begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+% \end{fichacatalografica}
+
+\input{fichacatalografica}
+
+
+% Inserir folha de aprovação
+
+% Exemplo de Folha de aprovação, elemento obrigatório da NBR 14724/2011 (seção 4.2.1.3). 
+% Utilizar este modelo até a aprovação do trabalho. Após isso, substitua todo o conteúdo 
+% deste arquivo por uma imagem da página assinada pela banca com o comando abaixo:
+%
+% \includepdf{folhadeaprovacao_final.pdf}
+%
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    \begin{center}
+      \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
+    \end{center}
+    \vspace*{\fill}
+    
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+        
+    Trabalho aprovado. \imprimirlocal, 24 de novembro de 2016:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador} 
+   \assinatura{\textbf{Professor} \\ Convidado 1}
+   \assinatura{\textbf{Professor} \\ Convidado 2}
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+      
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+  
+\end{folhadeaprovacao}
+% ---
+
+\input{dedicatoria}
+\input{resumo}
+\input{indices-siglas}
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+% ---
+% Inclusão de capítulo de Introdução ao trabalho
+% ---
+\input{introducao}
+\input{revisao-literatura}
+\input{cenario}
+\input{estudo-de-caso}
+
+% ----------------------------------------------------------
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ----------------------------------------------------------
+\phantompart
+
+\input{consideracoes-finais}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{referencias}
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+ \let\tccaddcontentsline\addcontentsline
+\renewcommand\addcontentsline[3]{
+  \ifthenelse{\equal{#1}{lof}}{} {
+    \ifthenelse{\equal{#1}{lot}}{}{\tccaddcontentsline{#1}{#2}{#3}}
+  }
+}
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+\chapter{Código para realizar a inserção de dados} \label{apendice}
+
+\begin{lstlisting}
+package com.contaazul.jarvis.hudi.insert
+
+import org.apache.hudi.DataSourceWriteOptions
+import org.apache.hudi.config.HoodieWriteConfig
+import org.apache.hudi.hive.MultiPartKeysValueExtractor
+import org.apache.spark.sql.functions.{concat, lit}
+import org.apache.spark.sql.types.DateType
+import org.apache.spark.sql.{SaveMode, SparkSession}
+import org.apache.spark.{SparkConf, SparkContext}
+
+object HudiInsert {
+
+  def processInsert(params: Map[String, String]) {
+
+    val spark = SparkSession.builder().appName("insert " + params("table")).getOrCreate()
+
+    import spark.implicits._
+
+    // Read data from S3 and create a DataFrame with Partition and Record Key
+    var insertDF = spark.read.json(
+      "s3://cdc-tests/cdc/" + params("upsertOption") + "/" +
+        params("instance") + "/" + params("database") + "/" +
+        params("schema") + "/" + params("table") + "/" +
+        params("year") + "/" + params("month") + "/" +
+        params("day") + "/" + params("hour"))
+
+    insertDF = insertDF.withColumn("committed_at", insertDF("committed_at").cast(DateType))
+
+    val hudiTablePartitionKey = "partition_key"
+    insertDF = insertDF.withColumn(hudiTablePartitionKey, concat(lit("year="), $"year", lit("/month="), $"month", lit("/day="), $"day", lit("/hour="), $"hour"))
+
+    //Specify common DataSourceWriteOptions in the single hudiOptions variable
+    val hudiOptions = Map[String, String](
+      HoodieWriteConfig.TABLE_NAME -> params("table"),
+      DataSourceWriteOptions.STORAGE_TYPE_OPT_KEY -> "COPY_ON_WRITE",
+      DataSourceWriteOptions.RECORDKEY_FIELD_OPT_KEY -> "id",
+      DataSourceWriteOptions.PARTITIONPATH_FIELD_OPT_KEY -> hudiTablePartitionKey,
+      DataSourceWriteOptions.PRECOMBINE_FIELD_OPT_KEY -> "committed_at",
+      DataSourceWriteOptions.HIVE_SYNC_ENABLED_OPT_KEY -> "true",
+      DataSourceWriteOptions.HIVE_DATABASE_OPT_KEY -> params("database"),
+      DataSourceWriteOptions.HIVE_TABLE_OPT_KEY -> params("table"),
+      DataSourceWriteOptions.HIVE_PARTITION_FIELDS_OPT_KEY -> "year,month,day,hour",
+      DataSourceWriteOptions.HIVE_PARTITION_EXTRACTOR_CLASS_OPT_KEY -> classOf[MultiPartKeysValueExtractor].getName
+    )
+
+    insertDF.write.format("org.apache.hudi")
+      .option(DataSourceWriteOptions.OPERATION_OPT_KEY, DataSourceWriteOptions.INSERT_OPERATION_OPT_VAL)
+      .options(hudiOptions)
+      .mode(SaveMode.Overwrite)
+      .save("s3://cdc-tests/hudi/" + params("table"))
+  }
+
+  def main(args: Array[String]) {
+
+    val conf = new SparkConf().setAppName("Update Users")
+    conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    conf.set("spark.sql.hive.convertMetastoreParquet", "false")
+    conf.set("spark.executor.memory", "7G")
+    conf.set("spark.dynamicAllocation.executorIdleTimeout", "3600")
+    conf.set("spark.executor.cores", "1")
+    conf.set("spark.dynamicAllocation.initialExecutors", "16")
+    conf.set("spark.sql.parquet.outputTimestampType", "TIMESTAMP_MILLIS")
+
+    val sc = new SparkContext(conf)
+
+    val instance = args(0)
+    val database = args(1)
+    val schema = args(2)
+    val table = args(3)
+    val year = args(4)
+    val month = args(5)
+    val day = args(6)
+    val hour = args(7)
+
+    val params = Map[String, String](
+      "instance" -> instance,
+      "database" -> database,
+      "schema" -> schema,
+      "table" -> table,
+      "year" -> year,
+      "month" -> month,
+      "day" -> day,
+      "hour" -> hour
+    )
+
+    processInsert(params)
+
+    sc.stop()
+  }
+}
+
+\end{lstlisting}
+
+\chapter{Código para realizar a atualização e exclusão de dados} \label{apendice}
+
+\begin{lstlisting}
+package com.contaazul.jarvis.hudi.insert
+
+import org.apache.hudi.DataSourceWriteOptions
+import org.apache.hudi.config.HoodieWriteConfig
+import org.apache.hudi.hive.MultiPartKeysValueExtractor
+import org.apache.spark.sql.functions.{concat, lit}
+import org.apache.spark.sql.types.DateType
+import org.apache.spark.sql.{SaveMode, SparkSession}
+import org.apache.spark.{SparkConf, SparkContext}
+
+object HudiInsert {
+
+  def processInsert(params: Map[String, String]) {
+
+    val spark = SparkSession.builder().appName("insert " + params("table")).getOrCreate()
+
+    import spark.implicits._
+
+    // Read data from S3 and create a DataFrame with Partition and Record Key
+    var insertDF = spark.read.json(
+      "s3://cdc-tests/cdc/" + params("upsertOption") + "/" +
+        params("instance") + "/" + params("database") + "/" +
+        params("schema") + "/" + params("table") + "/" +
+        params("year") + "/" + params("month") + "/" +
+        params("day") + "/" + params("hour"))
+
+    insertDF = insertDF.withColumn("committed_at", insertDF("committed_at").cast(DateType))
+
+    val hudiTablePartitionKey = "partition_key"
+    insertDF = insertDF.withColumn(hudiTablePartitionKey, concat(lit("year="), $"year", lit("/month="), $"month", lit("/day="), $"day", lit("/hour="), $"hour"))
+
+    //Specify common DataSourceWriteOptions in the single hudiOptions variable
+    val hudiOptions = Map[String, String](
+      HoodieWriteConfig.TABLE_NAME -> params("table"),
+      DataSourceWriteOptions.STORAGE_TYPE_OPT_KEY -> "COPY_ON_WRITE",
+      DataSourceWriteOptions.RECORDKEY_FIELD_OPT_KEY -> "id",
+      DataSourceWriteOptions.PARTITIONPATH_FIELD_OPT_KEY -> hudiTablePartitionKey,
+      DataSourceWriteOptions.PRECOMBINE_FIELD_OPT_KEY -> "committed_at",
+      DataSourceWriteOptions.HIVE_SYNC_ENABLED_OPT_KEY -> "true",
+      DataSourceWriteOptions.HIVE_DATABASE_OPT_KEY -> params("database"),
+      DataSourceWriteOptions.HIVE_TABLE_OPT_KEY -> params("table"),
+      DataSourceWriteOptions.HIVE_PARTITION_FIELDS_OPT_KEY -> "year,month,day,hour",
+      DataSourceWriteOptions.HIVE_PARTITION_EXTRACTOR_CLASS_OPT_KEY -> classOf[MultiPartKeysValueExtractor].getName
+    )
+
+    insertDF.write.format("org.apache.hudi")
+      .option(DataSourceWriteOptions.OPERATION_OPT_KEY, DataSourceWriteOptions.INSERT_OPERATION_OPT_VAL)
+      .options(hudiOptions)
+      .mode(SaveMode.Overwrite)
+      .save("s3://cdc-tests/hudi/" + params("table"))
+  }
+
+  def main(args: Array[String]) {
+
+    val conf = new SparkConf().setAppName("Update Users")
+    conf.set("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+    conf.set("spark.sql.hive.convertMetastoreParquet", "false")
+    conf.set("spark.executor.memory", "7G")
+    conf.set("spark.dynamicAllocation.executorIdleTimeout", "3600")
+    conf.set("spark.executor.cores", "1")
+    conf.set("spark.dynamicAllocation.initialExecutors", "16")
+    conf.set("spark.sql.parquet.outputTimestampType", "TIMESTAMP_MILLIS")
+
+    val sc = new SparkContext(conf)
+
+    val instance = args(0)
+    val database = args(1)
+    val schema = args(2)
+    val table = args(3)
+    val year = args(4)
+    val month = args(5)
+    val day = args(6)
+    val hour = args(7)
+
+    val params = Map[String, String](
+      "instance" -> instance,
+      "database" -> database,
+      "schema" -> schema,
+      "table" -> table,
+      "year" -> year,
+      "month" -> month,
+      "day" -> day,
+      "hour" -> hour
+    )
+
+    processInsert(params)
+
+    sc.stop()
+  }
+}
+
+\end{lstlisting}
+
+\end{apendicesenv}
+\end{document}
